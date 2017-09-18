@@ -892,7 +892,7 @@ static void *controller_thread_fn(void *arg)
 	/* set up primary channel */
 	optimal_settings(s->freqs[0], demod.rate_in);
 	if (dongle.direct_sampling) {
-		verbose_direct_sampling(dongle.dev, 1);}
+		verbose_direct_sampling(dongle.dev, 2);}
 	if (dongle.offset_tuning) {
 		verbose_offset_tuning(dongle.dev);}
 
@@ -1105,7 +1105,7 @@ int main(int argc, char **argv)
 			if (strcmp("deemp",  optarg) == 0) {
 				demod.deemph = 1;}
 			if (strcmp("direct",  optarg) == 0) {
-				dongle.direct_sampling = 1;}
+				dongle.direct_sampling = 2;}
 			if (strcmp("offset",  optarg) == 0) {
 				dongle.offset_tuning = 1;}
 			break;
