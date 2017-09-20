@@ -6,6 +6,12 @@ For more information see:
 http://sdr.osmocom.org/trac/wiki/rtl-sdr
 
 HOW TO BUILD AND INSTALL:
+1.) Using EasyInstall:
+chmod +x ./EasyInstall
+./EasyInstall
+
+2.) Manual Install
+* You'll need libusb-1.0-0-dev and cmake installed
 cd rtl-sdr/
 mkdir build
 cd build
