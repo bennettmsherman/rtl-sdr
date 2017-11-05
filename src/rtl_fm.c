@@ -1043,7 +1043,7 @@ int main(int argc, char **argv)
 	int r, opt;
 	int dev_given = 0;
 	int custom_ppm = 0;
-    int enable_biastee = 0;
+	int enable_biastee = 0;
 	dongle_init(&dongle);
 	demod_init(&demod);
 	output_init(&output);
@@ -1110,8 +1110,12 @@ int main(int argc, char **argv)
 				dongle.offset_tuning = 1;}
 			break;
 		case 'F':
-			demod.downsample_passes = 1;  /* truthy placeholder */
-			demod.comp_fir_size = atoi(optarg);
+			int firSize = atoi(optarg);
+			// A value of -1 is ignored, or "off"
+			if (firSize >= 0) {
+				demod.downsample_passes = 1;  /* truthy placeholder */
+				demod.comp_fir_size = atoi(optarg);
+			}
 			break;
 		case 'A':
 			if (strcmp("std",  optarg) == 0) {
