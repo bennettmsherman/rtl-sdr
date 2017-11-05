@@ -1077,8 +1077,12 @@ int main(int argc, char **argv)
 			demod.rate_out = (uint32_t)atofs(optarg);
 			break;
 		case 'r':
-			output.rate = (int)atofs(optarg);
-			demod.rate_out2 = (int)atofs(optarg);
+			// Only resample if the rate is > 0
+			if ((int)atofs(optarg) > 0)
+			{
+				output.rate = (int)atofs(optarg);
+				demod.rate_out2 = (int)atofs(optarg);
+			}
 			break;
 		case 'o':
 			fprintf(stderr, "Warning: -o is very buggy\n");
