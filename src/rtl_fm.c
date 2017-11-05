@@ -1139,8 +1139,7 @@ int main(int argc, char **argv)
 			if (strcmp("wbfm",  optarg) == 0) {
 				controller.wb_mode = 1;
 				demod.mode_demod = &fm_demod;
-				demod.custom_atan = 1;
-				demod.deemph = 1;}
+			}
 			break;
 		case 'T':
 			enable_biastee = 1;
