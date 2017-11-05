@@ -1110,9 +1110,8 @@ int main(int argc, char **argv)
 				dongle.offset_tuning = 1;}
 			break;
 		case 'F':
-			int firSize = atoi(optarg);
 			// A value of -1 is ignored, or "off"
-			if (firSize >= 0) {
+			if (atoi(optarg) >= 0) {
 				demod.downsample_passes = 1;  /* truthy placeholder */
 				demod.comp_fir_size = atoi(optarg);
 			}
