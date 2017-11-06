@@ -1067,10 +1067,17 @@ int main(int argc, char **argv)
 			}
 			break;
 		case 'g':
-			dongle.gain = (int)(atof(optarg) * 10);
+			// Don't try to set the gain if the param is negative
+			if (atof(optarg) >= 0)
+			{
+				dongle.gain = (int)(atof(optarg) * 10);
+			}
 			break;
 		case 'l':
-			demod.squelch_level = (int)atof(optarg);
+			if ((int)atof(optarg) >= 0)
+			{
+				demod.squelch_level = (int)atof(optarg);
+			}
 			break;
 		case 's':
 			demod.rate_in = (uint32_t)atofs(optarg);
@@ -1085,10 +1092,14 @@ int main(int argc, char **argv)
 			}
 			break;
 		case 'o':
-			fprintf(stderr, "Warning: -o is very buggy\n");
-			demod.post_downsample = (int)atof(optarg);
-			if (demod.post_downsample < 1 || demod.post_downsample > MAXIMUM_OVERSAMPLE) {
-				fprintf(stderr, "Oversample must be between 1 and %i\n", MAXIMUM_OVERSAMPLE);}
+			// Only change from the default if greater than or equal to 1
+			if ((int)atof(optarg) >= 1)
+			{
+				fprintf(stderr, "Warning: -o is very buggy\n");
+				demod.post_downsample = (int)atof(optarg);
+				if (demod.post_downsample < 1 || demod.post_downsample > MAXIMUM_OVERSAMPLE) {
+					fprintf(stderr, "Oversample must be between 1 and %i\n", MAXIMUM_OVERSAMPLE);}
+			}
 			break;
 		case 't':
 			demod.conseq_squelch = (int)atof(optarg);
@@ -1098,8 +1109,11 @@ int main(int argc, char **argv)
 			}
 			break;
 		case 'p':
-			dongle.ppm_error = atoi(optarg);
-			custom_ppm = 1;
+			if (atoi(optarg) >= 0)
+			{
+				dongle.ppm_error = atoi(optarg);
+				custom_ppm = 1;
+			}
 			break;
 		case 'E':
 			if (strcmp("edge",  optarg) == 0) {
